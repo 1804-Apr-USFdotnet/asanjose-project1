@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
+using DataLayer;
 
 
-namespace DataLayer
+namespace DataLayer.Models
 {
 
 
     [Table("Restaurant")]
-    public class Restaurants
+    public class RestaurantModel : BaseEntity
     {
         [Key]
        
@@ -31,28 +32,18 @@ namespace DataLayer
         [StringLength(50)]
         public string Cuisine { get; set; }
 
-        public ICollection<ReviewModel> reviewModels { get; set; }
+        public ICollection<ReviewModel> ReviewModel { get; set; }
 
 
-        public Restaurants()
+       public DateTime Created { get; set; }
+        public DateTime? Modified { get; set; }
+
+
+        public RestaurantModel()
         {
-        }
-
-        public Restaurants(int restid, string rest, string address, string city, decimal rate, string cuisine)
-        {
-            RestID = restid;
-            Restaurant = rest;
-            Address = address;
-            City = city;
-            Rating = rate;
-            Cuisine = cuisine;
+            ReviewModel = new HashSet<ReviewModel>();
 
         }
 
-        public override string ToString()
-        {
-            return $"\nRestID:{RestID} \nRname: {Restaurant} \nAddress: {Address} \nCity: {City} \nRating: {Rating} \nCuisine: {Cuisine} ";
-
-        }
     }
 }

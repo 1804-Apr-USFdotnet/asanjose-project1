@@ -1,0 +1,63 @@
+﻿@model ClassLibrary1.RestaurantsClass
+
+@{
+    ViewBag.Title = "Details";
+    string name = Convert.ToString(Model.Restaurant);
+    int id  = Convert.ToInt32(Model.RestID);
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RestaurantsClass</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Restaurant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Restaurant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuisine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuisine)
+        </dd>
+
+       
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RestID }) |
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink(linkText:"Create Review",actionName:"Create", controllerName:"Reviews",routeValues: new { id , name},htmlAttributes:null)
+</p>
