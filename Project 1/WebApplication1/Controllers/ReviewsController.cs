@@ -23,6 +23,15 @@ namespace WebApplication1.Controllers
             return View(reviewModels);
         }
 
+        public ActionResult GetRestaurant(int id)
+        {
+            var review = crud.getRestRev(id);
+            return View(review);
+        
+        }
+
+       
+
         // GET: ReviewClasses/Details/5
         public ActionResult Details(int? id)
         {
@@ -43,6 +52,7 @@ namespace WebApplication1.Controllers
         {
             var rev = new ReviewClass();
             rev.RestID = id;
+            rev.Restaurant = name;
             return View(rev);
         }
 
@@ -51,16 +61,16 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RevID,RestID,Restaurant,Rating,Review,UserID")] ReviewClass reviewClass, int id)
+        public ActionResult Create([Bind(Include = "RevID,RestID,Restaurant,Rating,Review,UserID")] ReviewClass reviewClass)
         {
             if (ModelState.IsValid)
             {
-                reviewClass = crud.getID(id);
+              
                 crud.Add(reviewClass);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RestID = new SelectList(restcrud.GetRestaurantModel(), "RestID", "Restaurant", reviewClass.RestID);
+           // ViewBag.RestID = new SelectList(restcrud.GetRestaurantModel(), "RestID", "Restaurant", reviewClass.RestID);
             return View(reviewClass);
         }
 
@@ -76,7 +86,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-           ViewBag.RestID = new SelectList(restcrud.GetRestaurantModel(), "RestID", "Restaurant", reviewClass.RestID);
+           //ViewBag.RestID = new SelectList(restcrud.GetRestaurantModel(), "RestID", "Restaurant", reviewClass.RestID);
             return View(reviewClass);
         }
 
@@ -92,7 +102,7 @@ namespace WebApplication1.Controllers
                 crud.Update(reviewClass);              
                 return RedirectToAction("Index");
             }
-           // ViewBag.RestID = new SelectList(restcrud.GetRestaurantModel(), "RestID", "Restaurant", reviewClass.RestID);
+          // ViewBag.RestID = new SelectList(restcrud.GetRestaurantModel(), "RestID", "Restaurant", reviewClass.RestID);
             return View(reviewClass);
         }
 

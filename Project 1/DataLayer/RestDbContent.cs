@@ -39,7 +39,9 @@ namespace DataLayer
             modelBuilder.Entity<RestaurantModel>()
                 .Property(e => e.Cuisine)
                 .IsUnicode(false);
+
         }
+    
 
         public override int SaveChanges()
         {

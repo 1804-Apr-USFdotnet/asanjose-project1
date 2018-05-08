@@ -14,6 +14,8 @@ namespace ClassLibrary1
     {
 
         RestaurantCrud crud = new RestaurantCrud();
+        List<RestaurantsClass> res = new List<RestaurantsClass>();
+
 
 
         public IEnumerable<RestaurantModel> GetRestaurantModel()
@@ -22,6 +24,37 @@ namespace ClassLibrary1
             var rest = result.Select(x => ToWeb(x));
             return rest;
 
+        }
+
+
+        public IEnumerable<RestaurantModel> GetRest(string desired)
+        {
+            var result = crud.GetRestaurant(desired);
+            var rest = result.Select(x => ToWeb(x));
+            return rest;
+
+        }
+
+
+        public IEnumerable<RestaurantModel> SortRating()
+        {
+            var result = crud.SortRating();
+            result = result.Select(x => ToWeb(x));
+            return result;
+        }
+
+        public IEnumerable<RestaurantModel> SortDescend()
+        {
+            var result = crud.SortDescend();
+            result = result.Select(x => ToWeb(x));
+            return result;
+        }
+
+        public IEnumerable<RestaurantModel> SortAscend()
+        {
+            var result = crud.SortAscend();
+            result = result.Select(x => ToWeb(x));
+            return result;
         }
 
 
@@ -34,7 +67,7 @@ namespace ClassLibrary1
 
         public void Add(RestaurantsClass restaurantclass)
         {
-           crud.AddRestaurant(ToData(restaurantclass));
+            crud.AddRestaurant(ToData(restaurantclass));
 
 
         }
@@ -63,15 +96,14 @@ namespace ClassLibrary1
                 Cuisine = classrest.Cuisine,
                 Created = classrest.Created,
                 Modified = classrest.Modified
-                
             };
-                
+
             return DataRestaurant;
-        } 
+        }
 
 
 
-            public static RestaurantsClass ToWeb(DataLayer.Models.RestaurantModel dataRestaurant)
+        public static RestaurantsClass ToWeb(DataLayer.Models.RestaurantModel dataRestaurant)
         {
 
             var webRest = new RestaurantsClass()
@@ -82,21 +114,48 @@ namespace ClassLibrary1
                 City = dataRestaurant.City,
                 Rating = dataRestaurant.Rating,
                 Cuisine = dataRestaurant.Cuisine,
+                ReviewModel = new List<ReviewModel>()
 
             };
+            foreach (var review in dataRestaurant.ReviewModel)
+            {
+                var temp = new ReviewModel
+                {
+                    RevID = review.RevID,
+                    RestID = review.RestID,
+                    UserID = review.UserID,
+                    Review = review.Review,
+                    Rating = review.Rating,
+                    Restaurant = review.Restaurant
+                };
+
+                webRest.ReviewModel.Add(temp);
+            }
 
             return webRest;
-
         }
 
-        /*
-        public override string ToString()
+
+
+
+        public float GetAverage()
         {
-            return $"\nRestID:{RestID} \nRname: {Restaurant} \nAddress: {Address} \nCity: {City} \nRating: {Rating} \nCuisine: {Cuisine} ";
+            float sum = 0F;
+            foreach (var review in ReviewModel)
+            {
+                sum += (float)review.Rating;
+
+            }
+
+            return (sum / ReviewModel.Count);
 
         }
-        */
+
+
 
     }
 }
+
+    
+
 

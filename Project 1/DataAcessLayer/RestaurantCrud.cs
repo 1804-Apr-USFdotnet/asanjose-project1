@@ -18,6 +18,28 @@ namespace DataAcessLayer
 
         }
 
+        public IEnumerable<RestaurantModel> GetRestaurant(string desired)
+        {
+            return db.restaurants.Where(x => x.Restaurant.Contains(desired)).ToList();
+
+        }
+
+        public IEnumerable<RestaurantModel> SortDescend()
+        {
+            return db.restaurants.OrderByDescending(x => x.Restaurant);
+        }
+
+        public IEnumerable<RestaurantModel> SortAscend()
+        {
+            return db.restaurants.OrderBy(x => x.Restaurant);
+        }
+
+        public IEnumerable<RestaurantModel> SortRating()
+        {
+            return db.restaurants.OrderByDescending(x => x.Rating).Take(3);
+        }
+
+
         public RestaurantModel GetById(int? id)
         {
 
@@ -50,9 +72,9 @@ namespace DataAcessLayer
             }
 
         }
-        
 
-
+            
+       
 
     }
 }

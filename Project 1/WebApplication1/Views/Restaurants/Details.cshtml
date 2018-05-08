@@ -4,12 +4,13 @@
     ViewBag.Title = "Details";
     string name = Convert.ToString(Model.Restaurant);
     int id  = Convert.ToInt32(Model.RestID);
+    string avg = Convert.ToString(Model.GetAverage());
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>RestaurantsClass</h4>
+    <h4>@Html.DisplayFor(model => model.Restaurant)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -41,7 +42,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Rating)
+            @Html.Raw(avg)
         </dd>
 
         <dt>
@@ -59,5 +60,6 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.RestID }) |
     @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink(linkText:"Create Review",actionName:"Create", controllerName:"Reviews",routeValues: new { id , name},htmlAttributes:null)
+    @Html.ActionLink(linkText: "Create Review", actionName: "Create", controllerName: "Reviews", routeValues: new { id, name }, htmlAttributes: null) |
+    @Html.ActionLink(linkText: "Show Review", actionName: "GetRestaurant", controllerName: "Reviews", routeValues: new { id }, htmlAttributes: null)
 </p>

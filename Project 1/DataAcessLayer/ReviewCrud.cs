@@ -18,11 +18,20 @@ namespace DataAcessLayer
 
         }
 
+        public IEnumerable<ReviewModel> ReviewofRestaurant(int id)
+        {
+            return db.reviews.Where(x => x.RestID == id).ToList();
+
+        }
+
         public ReviewModel GetReviewById(int? id)
         {
             return db.reviews.Find(id);
 
         }
+
+       
+      
 
         public void AddReview(ReviewModel review)
         {
@@ -40,7 +49,7 @@ namespace DataAcessLayer
 
         public void EditReview(ReviewModel review)
         {
-            var rev = db.reviews.Find(review.RestID);
+            var rev = db.reviews.Find(review.RevID);
             if (rev != null)
             {
                 db.Entry(rev).CurrentValues.SetValues(review);

@@ -13,6 +13,12 @@ namespace DataLayer.Models
     [Table("Restaurant")]
     public class RestaurantModel : BaseEntity
     {
+        public RestaurantModel()
+        {
+            this.ReviewModel = new HashSet<ReviewModel>();
+        }
+
+
         [Key]
        
         public int RestID { get; set; }
@@ -32,18 +38,16 @@ namespace DataLayer.Models
         [StringLength(50)]
         public string Cuisine { get; set; }
 
-        public ICollection<ReviewModel> ReviewModel { get; set; }
+       
+ 
+        public virtual ICollection<ReviewModel> ReviewModel { get; set; }
 
 
        public DateTime Created { get; set; }
         public DateTime? Modified { get; set; }
 
 
-        public RestaurantModel()
-        {
-            ReviewModel = new HashSet<ReviewModel>();
-
-        }
+        
 
     }
 }

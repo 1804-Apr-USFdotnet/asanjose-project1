@@ -1,23 +1,11 @@
 ﻿@model IEnumerable<ClassLibrary1.RestaurantsClass>
 
 @{
-    ViewBag.Title = "Index";
-    
+    ViewBag.Title = "SortAscend";
 }
 
-<h2>Index</h2>
+<h2>Restaurants in Ascending Order</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Ascend", "SortAscend") | @Html.ActionLink("Descend", "SortDescend")
-</p>
-
-
-<form asp-controller="Restaurants" asp-action="Index">
-    <p>
-        Restaurant: <input type="text" name="searchstring" >
-        <input type="submit" value="Search" />
-    </p>
-</form>
 
 <table class="table">
     <tr>
@@ -57,12 +45,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Cuisine)
         </td>
-       
+      
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RestID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RestID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RestID })
-        </td>
+        
     </tr>
 }
 

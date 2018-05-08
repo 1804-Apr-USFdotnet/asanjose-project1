@@ -7,9 +7,9 @@ using DataLayer.Models;
 
 namespace ClassLibrary1.Services
 {
-    class BusinessLogic
+   public class BusinessLogic
     {
-        private RestaurantsClass test = new RestaurantsClass();
+        RestaurantsClass test = new RestaurantsClass();
         public List<RestaurantModel> SortDescend()
         {
             var list = test.GetRestaurantModel();
@@ -42,14 +42,7 @@ namespace ClassLibrary1.Services
             return list.OrderBy(x => x.Cuisine).ToList();
         }
 
-        public RestaurantModel SearchRestaurant(string desired)
-        { 
-            var list = test.GetRestaurantModel();
-            var result = list.FirstOrDefault(x => x.Restaurant.Contains(desired));
-            return result;
-           
-            
-        } 
+       
 
     }
 }

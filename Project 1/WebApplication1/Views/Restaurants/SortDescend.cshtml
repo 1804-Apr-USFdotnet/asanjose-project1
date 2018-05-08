@@ -1,23 +1,11 @@
 ﻿@model IEnumerable<ClassLibrary1.RestaurantsClass>
 
 @{
-    ViewBag.Title = "Index";
-    
+    ViewBag.Title = "SortDescend";
 }
 
-<h2>Index</h2>
+<h2>Restaurants in Descending Order</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Ascend", "SortAscend") | @Html.ActionLink("Descend", "SortDescend")
-</p>
-
-
-<form asp-controller="Restaurants" asp-action="Index">
-    <p>
-        Restaurant: <input type="text" name="searchstring" >
-        <input type="submit" value="Search" />
-    </p>
-</form>
 
 <table class="table">
     <tr>
@@ -37,10 +25,12 @@
             @Html.DisplayNameFor(model => model.Cuisine)
         </th>
         
-        <th></th>
+
+    
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Restaurant)
@@ -57,13 +47,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Cuisine)
         </td>
-       
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RestID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RestID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RestID })
-        </td>
+
+      
     </tr>
-}
+    }
 
 </table>
+
+<footer> @Html.ActionLink("Back to List", "Index")</footer>
+

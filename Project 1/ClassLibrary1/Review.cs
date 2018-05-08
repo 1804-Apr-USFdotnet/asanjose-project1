@@ -21,6 +21,15 @@ namespace ClassLibrary1
 
         }
 
+        public IEnumerable<ReviewModel> getRestRev(int id)
+        {
+            var result = crud.ReviewofRestaurant(id);
+            result = result.Select(x => ToWeb(x));
+            return result;
+
+        }
+
+       
 
         public ReviewClass getID(int? id)
         {
@@ -28,6 +37,7 @@ namespace ClassLibrary1
 
         }
 
+        
 
         public void Add(ReviewClass reviewclass)
         {

@@ -15,9 +15,11 @@ namespace DataLayer.Models
         {
             [Key]
             public int RevID { get; set; }    
-
+            
+        
             public int RestID { get; set; }
            
+         
             public virtual RestaurantModel Restaurants { get; set; }
             
             public string Restaurant { get; set; }
