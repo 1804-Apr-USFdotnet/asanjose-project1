@@ -12,7 +12,7 @@ namespace ClassLibrary1
 {
     public class RestaurantsClass : RestaurantModel
     {
-
+        public RestDbContent db = new RestDbContent();
         RestaurantCrud crud = new RestaurantCrud();
         List<RestaurantsClass> res = new List<RestaurantsClass>();
 
@@ -105,14 +105,21 @@ namespace ClassLibrary1
 
         public static RestaurantsClass ToWeb(DataLayer.Models.RestaurantModel dataRestaurant)
         {
-
+            
+            decimal rating = 0;
+            using (var db = new RestDbContent())
+            {
+                var review = db.reviews.Where(r => r.RestID == dataRestaurant.RestID);
+                if (review.Count() != 0)
+                    rating = review.Average(r => r.Rating);
+            }
             var webRest = new RestaurantsClass()
             {
                 RestID = dataRestaurant.RestID,
                 Restaurant = dataRestaurant.Restaurant,
                 Address = dataRestaurant.Address,
                 City = dataRestaurant.City,
-                Rating = dataRestaurant.Rating,
+                Rating = rating,
                 Cuisine = dataRestaurant.Cuisine,
                 ReviewModel = new List<ReviewModel>()
 
