@@ -23,8 +23,10 @@ namespace DataLayer.Models
             public virtual RestaurantModel Restaurants { get; set; }
             
             public string Restaurant { get; set; }
+            [Required][Range(0.00, 5.00, ErrorMessage = "Please enter a value in between 0.00 and 5.00")]
             public decimal Rating { get; set; }
             public string Review { get; set; }
+            [Required][StringLength(50)]
             public string UserID { get; set; }
 
             [NotMapped]
