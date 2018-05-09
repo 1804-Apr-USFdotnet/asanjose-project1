@@ -24,7 +24,7 @@ namespace DataLayer.Models
         public int RestID { get; set; }
 
         [Column("Restaurant")]
-        [StringLength(30)][Required]
+        [StringLength(50)][Required]
         public string Restaurant { get; set; }
 
         [StringLength(50)][Required]
@@ -33,7 +33,7 @@ namespace DataLayer.Models
         [StringLength(20)][Required]
         public string City { get; set; }
 
-        [Required][Range(0.00,5.00, ErrorMessage = "Please enter a value in between 0.00 and 5.00")]
+        [Range(0.00,5.00, ErrorMessage = "Please enter a value in between 0.00 and 5.00")]
         public decimal? Rating { get; set; }
 
         [StringLength(20)] [Required]
